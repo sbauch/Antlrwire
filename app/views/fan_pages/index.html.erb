@@ -1,0 +1,47 @@
+<div class="wrapper">
+<nav>
+	<ul>
+		<li class="current"><a href="#jumpBasic">Basic Information</a></li>
+		<li><a href="#jumpDesign">Design</a></li>
+		<li><a href="#jumpConfig">Configuration</a></li>
+		<li><button>Save</button></li>
+	</ul>
+</nav>
+</div>
+<div id="content">
+<div class="wrapper content">
+	<section id="basic">
+		<h1><img src="/null.png" id="jumpBasic" alt="" />Basic Information</h1>
+				<%= render 'form'%>
+				<ul>
+					<% @fan_pages.each do |fan_page| %>
+					<li>
+						<div> 
+                            						</div>
+						<span><%= fan_page.name %></span><%= fan_page.url %>
+						<p><%= link_to 'Remove', fan_page, method: :delete %> &#183; 
+							<span><%if fan_page.primary? %> Primary
+						          <% else %><%= link_to 'Make Primary', { :controller => :fan_pages, :action => :toggle_primary, 
+							                    :id => fan_page.id },
+						                      { :title => "Make Primary"} %><% end %>
+						    </span></p>
+					</li>
+					<% end %>
+</ul>
+			<dd>
+				<span>twitter.com/</span><input type="text" id="twitter" tabindex="4" /><button>Add</button>
+				<ul>
+					<li>
+						<div>
+							<a href="#" class="remove" style="background-position:top right;padding-right:14px;" title="Remove this account from the list">X</a>
+						</div>
+						<span>PepsiCo</span>twitter.com/PepsiCo<br />
+						<p><a href="#">Remove</a></p>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+	</section>
+<hr />
+
+</div>

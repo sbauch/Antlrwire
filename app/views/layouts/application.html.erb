@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Antlr</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<header>
+		<div class="wrapper">
+			<ul id="breadcrumbs">
+				<li class="logo"><a href="/"><img src="/antlr.png" alt="Antlr" /></a></li>
+				<li><a href="/">&larr; Back to Home</a></li>
+						<%= render 'devise/menu/registration_items' %>
+			</ul>
+		</div>
+	</header>
+
+<%= yield %>
+	
+</body>
+</html>

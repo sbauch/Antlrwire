@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @fan_page.name %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @fan_page.url %>
+</p>
+
+<p>
+  <b>Primary:</b>
+  <%= @fan_page.primary %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @fan_page.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_fan_page_path(@fan_page) %> |
+<%= link_to 'Back', fan_pages_path %>

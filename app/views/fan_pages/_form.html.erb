@@ -1,0 +1,13 @@
+
+		<dl>
+			<dt class="padded"><label for="facebook">Social Accounts</label></dt>
+			<dd>
+<%= form_for(@fan_page) do |f| %>
+
+<span>facebook.com/</span>
+  <input id="facebook" tabindex="3">
+    <%= f.text_field(:url, :size => 10) %>
+  </input>
+  <button action="submit">Add</button>
+<% end %>
+
