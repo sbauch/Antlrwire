@@ -18,23 +18,24 @@ class FanPagesController < ApplicationController
   # GET /fan_pages
   # GET /fan_pages.json
   def index
-    unless params[:fan_page].nil?
-         unless FbGraph::Page.fetch("#{params[:fan_page][:url]}").name.nil?
-           
-    page = FbGraph::Page.fetch("#{params[:fan_page][:url]}")
-  
-   
-    @fan_page = FanPage.new(
-       :name => page.name,
-       :user_id => current_user.id,
-       :primary => FALSE,
-       :url => page.link)
-     end
-   else
-     
-  end
-  @fan_page = FanPage.new
-  
+    # unless params[:fan_page].nil? 
+    #     response = HTTParty.get("https://graph.facebook.com/#{params[:fan_page][:url]}")  
+    #     if response.code = "404"||"80"
+    #       redirect_to '/fan_pages', notice: 'Bad URL'
+    #       @fan_page = ""
+    #        else  
+    #    
+    #     @fan_page = FanPage.new(
+    #        :name => response['name'],
+    #        :user_id => current_user.id,
+    #        :primary => FALSE,
+    #        :url => response['link'])
+    #      end
+    #    else
+    #      
+    #   end
+      @fan_page = FanPage.new
+    #   
     @user = current_user
     @fan_pages = @user.fan_pages 
     respond_to do |format|
@@ -74,24 +75,24 @@ class FanPagesController < ApplicationController
   # POST /fan_pages.json
   def create
     
-    page = FbGraph::Page.fetch("#{params[:fan_page][:url]}")
+    response = HTTParty.get("https://graph.facebook.com/#{params[:fan_page][:url]}")  
+    code = response.code
     @fan_page = FanPage.new(
-     :name => page.name,
-     :user_id => current_user.id,
-     :primary => FALSE,
-     :url => page.link)
+       :name => response['name'],
+       :user_id => current_user.id,
+       :primary => FALSE,
+       :url => response['link'])
     
-
     respond_to do |format|
       if @fan_page.save
-        format.html { redirect_to '/fan_pages', notice: 'Fan page was successfully created.' }
+        format.html { redirect_to '/fan_pages', notice: 'Page Added Successfully' }
         format.json { render json: @fan_page, status: :created, location: @fan_page }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to '/fan_pages', alert: 'Bad URL or Page already added' }
         format.json { render json: @fan_page.errors, status: :unprocessable_entity }
       end
     end
-  end
+end
 
   # PUT /fan_pages/1
   # PUT /fan_pages/1.json

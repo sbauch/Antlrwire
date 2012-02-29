@@ -12,7 +12,12 @@
 <div class="wrapper content">
 	<section id="basic">
 		<h1><img src="/null.png" id="jumpBasic" alt="" />Basic Information</h1>
+		
 				<%= render 'form'%>
+				<p id="notice"><%= notice %></p>
+				<p id="alert" style="color:red;"><%= alert %></p>
+				
+				
 				<ul>
 					<% @fan_pages.each do |fan_page| %>
 					<li>
