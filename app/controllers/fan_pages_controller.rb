@@ -74,8 +74,9 @@ class FanPagesController < ApplicationController
   # POST /fan_pages
   # POST /fan_pages.json
   def create
-    
-    response = HTTParty.get("https://graph.facebook.com/#{params[:fan_page][:url]}")  
+    url = params[:fan_page][:url]
+    @url = url.gsub(/ /,'')
+    response = HTTParty.get("https://graph.facebook.com/#{@url}")  
     code = response.code
     @fan_page = FanPage.new(
        :name => response['name'],

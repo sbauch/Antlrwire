@@ -8,4 +8,5 @@ class FanPage < ActiveRecord::Base
   validates :url, :uniqueness => { :scope => :user_id,
       :notice => "Already added this page" }
   
+  
 end
