@@ -8,5 +8,6 @@ class FanPage < ActiveRecord::Base
   validates :url, :uniqueness => { :scope => :user_id,
       :notice => "Already added this page" }
   
-  
+  #scopes
+  default_scope :order => 'updated_at DESC'
 end

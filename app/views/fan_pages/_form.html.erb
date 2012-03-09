@@ -2,7 +2,7 @@
 		<dl>
 			<dt class="padded"><label for="facebook">Social Accounts</label></dt>
 			<dd>
-<%= form_for(@fan_page) do |f| %>
+<%= form_for @fan_page, :remote => true do |f| %>
 
 <span>facebook.com/</span>
   <input id="facebook" tabindex="3">

@@ -1,0 +1,12 @@
+	<div id="fan_page">
+		<ul>
+	<li>
+		<span><%= fan_page.name %></span><%= fan_page.url %>
+		<p><%= link_to 'Remove', fan_page, method: :delete, :remote => true, :class => 'remove', :confirm => 'Are you sure?' %> 
+			<span><%if fan_page.primary? %> Primary
+		          <% else %><%= link_to 'Make Primary', {:action => :toggle_primary, :id => fan_page.id},  :remote => true %><% end %>
+		    </span></p>
+	</li>
+	</ul>
+	
+	</div>

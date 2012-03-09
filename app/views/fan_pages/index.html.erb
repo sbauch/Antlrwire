@@ -13,25 +13,11 @@
 	<section id="basic">
 		<h1><img src="/null.png" id="jumpBasic" alt="" />Basic Information</h1>
 		
-				<%= render 'form'%>
+				<%= render 'form' %>
 				<p id="notice"><%= notice %></p>
-				<p id="alert" style="color:red;"><%= alert %></p>
-				
-				
-				<ul>
-					<% @fan_pages.each do |fan_page| %>
-					<li>
-						<div> 
-                            						</div>
-						<span><%= fan_page.name %></span><%= fan_page.url %>
-						<p><%= link_to 'Remove', fan_page, method: :delete %> &#183; 
-							<span><%if fan_page.primary? %> Primary
-						          <% else %><%= link_to 'Make Primary', { :controller => :fan_pages, :action => :toggle_primary, 
-							                    :id => fan_page.id },
-						                      { :title => "Make Primary"} %><% end %>
-						    </span></p>
-					</li>
-					<% end %>
+				<p id="alert" style="color:red;padding-left:30px;"><%= alert %></p>
+				<ul id="pages">
+				<%= render @fan_pages %>
 </ul>
 			<dd>
 				<span>twitter.com/</span><input type="text" id="twitter" tabindex="4" /><button>Add</button>

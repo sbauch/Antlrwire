@@ -1,7 +1,6 @@
 Antlr::Application.routes.draw do
   resources :fan_pages 
   get 'fan_pages/:id/toggle_primary', :controller => 'fan_pages', :action => 'toggle_primary'  
-
   devise_for :users
   
   root :to => 'fan_pages#index'

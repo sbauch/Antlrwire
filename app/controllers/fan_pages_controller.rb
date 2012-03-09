@@ -3,16 +3,16 @@ class FanPagesController < ApplicationController
   
   def toggle_primary
     user = current_user
-    pages = FanPage.find_all_by_user_id(user.id)
-    pages.each do |p|
+    @fan_pages = FanPage.find_all_by_user_id(user.id)
+    @fan_pages.each do |p|
       p.update_attributes(:primary => FALSE)
     end
-    @fanpage = FanPage.find(params[:id])
-    @fanpage.toggle!(:primary)
+    @fan_page = FanPage.find(params[:id])
+    @fan_page.toggle!(:primary)
     respond_to do |format|
       flash[:success] = "Primary Page Changed"
       format.html { redirect_to root_path }
-      format.js
+      format.js { @fan_pages = FanPage.find_all_by_user_id(user.id) }
     end
   end
   # GET /fan_pages
@@ -88,9 +88,12 @@ class FanPagesController < ApplicationController
       if @fan_page.save
         format.html { redirect_to '/fan_pages', notice: 'Page Added Successfully' }
         format.json { render json: @fan_page, status: :created, location: @fan_page }
+        format.js
       else
+        @alert = 'Bad URL or Page already added'
         format.html { redirect_to '/fan_pages', alert: 'Bad URL or Page already added' }
         format.json { render json: @fan_page.errors, status: :unprocessable_entity }
+        format.js { render 'failed.js', alert: 'Bad URL or Page already added' }
       end
     end
 end
@@ -119,7 +122,7 @@ end
 
     respond_to do |format|
       format.html { redirect_to fan_pages_url }
-      format.json { head :ok }
+      format.js   
     end
   end
 end
